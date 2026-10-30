@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { ComponentProps, ReactNode } from "react";
 
 type Variant = "solid" | "outline" | "ghost";
@@ -11,11 +12,20 @@ const variants: Record<Variant, string> = {
   ghost: "border-2 border-accent text-accent hover:bg-accent hover:text-accent-ink",
 };
 
-type Props = ComponentProps<"a"> & { variant?: Variant; children: ReactNode };
+type Props = ComponentProps<"a"> & { href: string; variant?: Variant; children: ReactNode };
 
-export default function ButtonLink({ variant = "solid", className = "", children, ...props }: Props) {
+/** Button-styled link. Internal routes ("/…") go through next/link. */
+export default function ButtonLink({ variant = "solid", className = "", href, children, ...props }: Props) {
+  const classes = `${base} ${variants[variant]} ${className}`;
+  if (href.startsWith("/")) {
+    return (
+      <Link href={href} className={classes} {...props}>
+        {children}
+      </Link>
+    );
+  }
   return (
-    <a className={`${base} ${variants[variant]} ${className}`} {...props}>
+    <a href={href} className={classes} {...props}>
       {children}
     </a>
   );

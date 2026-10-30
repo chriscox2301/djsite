@@ -74,7 +74,7 @@ export const socials: SocialLink[] = [
 // Hero background slides (driven by the 01/02/03 indicator).
 // PLACEHOLDER — procedurally generated images, see scripts/generate-placeholders.mjs.
 export const heroSlides: HeroSlide[] = [
-  { image: "/images/hero-1.jpg", alt: "Silhouette of a DJ behind the decks facing a crowd under turquoise lasers (placeholder image)" },
+  { image: "/images/hero-1.jpg", alt: "View from behind the decks towards a crowd under turquoise lasers (placeholder image)" },
   { image: "/images/hero-2.jpg", alt: "Crowd with raised hands under crossing turquoise laser beams (placeholder image)" },
   { image: "/images/hero-3.jpg", alt: "Stage with a bright white strobe light above the crowd (placeholder image)" },
 ];
@@ -117,21 +117,78 @@ export const about = {
   // PLACEHOLDER — dummy bio. Replace with MHENNEKE's real story.
   bio: "Placeholder bio. This is where MHENNEKE's story goes: background, sound, influences and what a set feels like. Keep it to three or four sentences so the card stays compact.",
   ctaLabel: "More about me",
-  // PLACEHOLDER — link to a full bio / press kit.
-  ctaUrl: "#contact",
+  ctaUrl: "/about",
   // PLACEHOLDER — procedurally generated image.
   image: "/images/about.jpg",
   imageAlt: "Lone figure in turquoise smoke between two speaker stacks (placeholder image)",
   sideNote: ["No sleep", "Full speed"],
 };
 
-export const navLinks = [
-  { id: "home", label: "Home" },
-  { id: "music", label: "Music" },
-  { id: "gigs", label: "Gigs" },
-  { id: "about", label: "About" },
-  { id: "contact", label: "Contact" },
-] as const;
+/**
+ * Main navigation. Links with a `section` scroll to that section on the home
+ * page (and highlight while it is in view); the others are separate pages.
+ */
+export const navLinks: { label: string; href: string; section?: string }[] = [
+  { label: "Home", href: "/", section: "home" },
+  { label: "Music", href: "/#music", section: "music" },
+  { label: "Gigs", href: "/#gigs", section: "gigs" },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/#contact", section: "contact" },
+];
+
+// ─── /about page ────────────────────────────────────────────────────────────
+
+export const aboutPage = {
+  // PLACEHOLDER — long bio, one string per paragraph.
+  bio: [
+    "Placeholder paragraph. Start with who MHENNEKE is and where the story began: the first party, the first record, the moment hardcore clicked.",
+    "Placeholder paragraph. Describe the sound in plain words: tempo, kicks, the records that always make the bag, and what sets a MHENNEKE set apart from the rest of the line-up.",
+    "Placeholder paragraph. Close with what is happening now: residencies, releases, collaborations or the next big stage.",
+  ],
+  // PLACEHOLDER — a line in MHENNEKE's own words, shown handwritten.
+  quote: "Placeholder quote in MHENNEKE's own words.",
+  // PLACEHOLDER — every value below is unknown and must be filled in.
+  facts: [
+    { label: "Based in", value: "TBA" },
+    { label: "Sound", value: "Hardcore" },
+    { label: "Plays", value: "TBA (e.g. club, festival, warehouse)" },
+    { label: "Active since", value: "TBA" },
+    { label: "Set length", value: "TBA" },
+  ],
+  // PLACEHOLDER — procedurally generated images; swap for press photos.
+  photos: [
+    { src: "/images/hero-2.jpg", alt: "Crowd under crossing turquoise lasers (placeholder image)" },
+    { src: "/images/crowd.jpg", alt: "Black-and-white crowd with raised hands (placeholder image)" },
+    { src: "/images/hero-3.jpg", alt: "Stage with a white strobe above the crowd (placeholder image)" },
+  ],
+  // PLACEHOLDER — leave empty until there is a real press kit (zip/pdf/drive link).
+  pressKitUrl: "",
+};
+
+// ─── /booking page ──────────────────────────────────────────────────────────
+
+export const bookingPage = {
+  // PLACEHOLDER — intro copy.
+  intro:
+    "Tell us about your event and we will get back to you with availability and a quote. The form opens a pre-filled email, so nothing is stored on this site.",
+  // PLACEHOLDER — set lengths offered.
+  setLengths: ["60 minutes", "90 minutes", "120 minutes", "Other"],
+  // PLACEHOLDER — practical info shown next to the form. Not confirmed by MHENNEKE.
+  info: [
+    {
+      title: "Sets",
+      body: "Placeholder: which set lengths and formats are available, and whether closing or b2b sets are an option.",
+    },
+    {
+      title: "Tech rider",
+      body: "Placeholder: required players, mixer and booth monitoring. Send the full rider on request.",
+    },
+    {
+      title: "Response time",
+      body: "Placeholder: how quickly booking requests are answered.",
+    },
+  ],
+};
 
 /** Format an ISO date as { day: "14", month: "NOV" } without timezone drift. */
 export function splitDate(iso: string) {

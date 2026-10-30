@@ -65,15 +65,15 @@ body {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* CRT-style scanlines, used on the hero */
-.scanlines {
-  background-image: repeating-linear-gradient(
-    to bottom,
-    rgb(0 0 0 / 0.35) 0,
-    rgb(0 0 0 / 0.35) 1px,
-    transparent 1px,
-    transparent 3px
-  );
+/*
+ * Page titles on sub-pages: outlined letters over a slightly offset turquoise
+ * fill, like a misregistered rave-flyer print.
+ */
+.misprint {
+  color: var(--color-bg);
+  -webkit-text-stroke: 2px var(--color-text);
+  paint-order: stroke fill;
+  text-shadow: 0.06em 0.05em 0 var(--color-accent-dim);
 }
 
 /* Glitch effect on the artist name (driven by data-text) */
