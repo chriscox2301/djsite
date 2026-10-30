@@ -28,7 +28,6 @@ export default function HeroSlides({ slides }: { slides: HeroSlide[] }) {
         {/* Darken the left side for text contrast, fade into the page at the bottom */}
         <div className="absolute inset-0 bg-gradient-to-r from-bg via-bg/80 to-bg/10 md:via-bg/55" />
         <div className="absolute inset-0 bg-gradient-to-t from-bg via-transparent to-bg/40" />
-        <div className="scanlines absolute inset-0 opacity-40 mix-blend-multiply" />
       </div>
 
       <div

@@ -105,25 +105,6 @@ function djBooth({ cx, top, w, h, r }) {
   return out;
 }
 
-function djSilhouette({ cx, headY, s }) {
-  const hw = 58 * s;
-  return `
-  <g filter="url(#rim)">
-    <path d="M${cx - 300 * s},${headY + 1000 * s}
-      L${cx - 240 * s},${headY + 260 * s}
-      Q${cx - 225 * s},${headY + 150 * s} ${cx - 80 * s},${headY + 125 * s}
-      L${cx - 45 * s},${headY + 70 * s}
-      L${cx + 45 * s},${headY + 70 * s}
-      L${cx + 80 * s},${headY + 125 * s}
-      Q${cx + 225 * s},${headY + 150 * s} ${cx + 245 * s},${headY + 270 * s}
-      L${cx + 310 * s},${headY + 1000 * s} Z" fill="#010303"/>
-    <path d="M${cx - 230 * s},${headY + 230 * s} L${cx - 330 * s},${headY + 520 * s} L${cx - 260 * s},${headY + 540 * s} L${cx - 170 * s},${headY + 300 * s} Z" fill="#010303"/>
-    <path d="M${cx + 230 * s},${headY + 230 * s} L${cx + 300 * s},${headY + 530 * s} L${cx + 230 * s},${headY + 545 * s} L${cx + 170 * s},${headY + 300 * s} Z" fill="#010303"/>
-    <ellipse cx="${cx}" cy="${headY}" rx="${hw}" ry="${hw * 1.18}" fill="#010303"/>
-    <path d="M${cx - hw * 1.05},${headY - 10 * s} Q${cx - hw * 0.6},${headY - hw * 1.6} ${cx + hw * 0.2},${headY - hw * 1.35} Q${cx + hw * 1.2},${headY - hw * 1.2} ${cx + hw * 1.05},${headY} Z" fill="#010303"/>
-  </g>`;
-}
-
 function defs(seed) {
   return `<defs>
     <filter id="blur-s" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="6"/></filter>
@@ -166,7 +147,7 @@ function scene({ w, h, seed, glow, beamSets, crowdOpts, extras = "", fg = "" }) 
 const crowdDefaults = { fill: "#010303", rim: TEAL, armChance: 0.35 };
 
 const images = {
-  // Hero slide 1: DJ from behind, crowd + teal beams
+  // Hero slide 1: view from behind the decks, crowd + teal beams
   "hero-1.jpg": (() => {
     const w = 1920, h = 1080, r = rng(11);
     return scene({
@@ -181,7 +162,7 @@ const images = {
       ],
       extras: `<rect x="1720" y="80" width="200" height="520" fill="#030909" stroke="${TEAL}" stroke-opacity=".15"/><rect x="560" y="60" width="150" height="280" fill="#030909" opacity=".8"/>`,
       crowdOpts: { ...crowdDefaults, top: 470, rows: 6 },
-      fg: djBooth({ cx: 1250, top: 800, w: 1100, h, r }) + djSilhouette({ cx: 1420, headY: 420, s: 0.9 }),
+      fg: djBooth({ cx: 1250, top: 830, w: 1300, h, r }),
     });
   })(),
   // Hero slide 2: wide crowd + crossing beams

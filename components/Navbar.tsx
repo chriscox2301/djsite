@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { navLinks } from "@/data/site";
 import Logo from "./Logo";
@@ -7,43 +9,38 @@ import SocialLinks from "./SocialLinks";
 import ButtonLink from "./ButtonLink";
 import { CloseIcon, MenuIcon } from "./icons";
 
-type SectionId = (typeof navLinks)[number]["id"];
-
 const OFFSET = 140;
+const sections = navLinks.flatMap((link) => (link.section ? [link.section] : []));
 
-/** Pick the section whose top has most recently scrolled past the navbar. */
-function findActive(current: SectionId): SectionId {
+/** Pick the home-page section whose top has most recently scrolled past the navbar. */
+function findActiveSection(): string {
   if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) {
-    return navLinks[navLinks.length - 1].id;
+    return sections[sections.length - 1];
   }
-  let best: { id: SectionId; top: number }[] = [];
-  for (const { id } of navLinks) {
-    const el = document.getElementById(id);
-    if (!el) continue;
-    const top = Math.round(el.getBoundingClientRect().top);
-    if (top > OFFSET) continue;
-    if (!best.length || top > best[0].top) best = [{ id, top }];
-    else if (top === best[0].top) best.push({ id, top });
+  let best = { id: sections[0], top: -Infinity };
+  for (const id of sections) {
+    const top = document.getElementById(id)?.getBoundingClientRect().top;
+    if (top !== undefined && top <= OFFSET && top > best.top) best = { id, top };
   }
-  if (!best.length) return navLinks[0].id;
-  // Sections side by side (Gigs + About on desktop) share a top: keep the current one.
-  return best.find((b) => b.id === current)?.id ?? best[0].id;
+  return best.id;
 }
 
 export default function Navbar() {
-  const [active, setActive] = useState<SectionId>("home");
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+  const [section, setSection] = useState(sections[0]);
   const [open, setOpen] = useState(false);
   // After a nav click, ignore scroll-spy until the smooth scroll has settled.
   const locked = useRef(false);
   const unlockTimer = useRef<number | undefined>(undefined);
 
   useEffect(() => {
+    if (!isHome) return;
     let frame = 0;
     const onScroll = () => {
       cancelAnimationFrame(frame);
       frame = requestAnimationFrame(() => {
-        if (locked.current) return;
-        setActive((current) => findActive(current));
+        if (!locked.current) setSection(findActiveSection());
       });
     };
     onScroll();
@@ -54,7 +51,7 @@ export default function Navbar() {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
     };
-  }, []);
+  }, [isHome]);
 
   useEffect(() => {
     if (!open) return;
@@ -68,13 +65,19 @@ export default function Navbar() {
     };
   }, [open]);
 
-  const select = (id: SectionId) => {
+  const isActive = (link: (typeof navLinks)[number]) =>
+    link.section ? isHome && section === link.section : pathname === link.href;
+
+  const select = (link: (typeof navLinks)[number]) => {
+    setOpen(false);
+    if (!link.section || !isHome) return;
     locked.current = true;
     window.clearTimeout(unlockTimer.current);
     unlockTimer.current = window.setTimeout(() => (locked.current = false), 1200);
-    setActive(id);
-    setOpen(false);
+    setSection(link.section);
   };
+
+  const bookingCurrent = pathname === "/booking";
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-border bg-bg/85 backdrop-blur-md">
@@ -83,26 +86,26 @@ export default function Navbar() {
 
         <nav aria-label="Main" className="hidden lg:block">
           <ul className="flex items-center gap-10">
-            {navLinks.map(({ id, label }) => {
-              const isActive = active === id;
+            {navLinks.map((link) => {
+              const active = isActive(link);
               return (
-                <li key={id}>
-                  <a
-                    href={`#${id}`}
-                    onClick={() => select(id)}
-                    aria-current={isActive ? "location" : undefined}
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    onClick={() => select(link)}
+                    aria-current={active ? (link.section ? "location" : "page") : undefined}
                     className={`relative py-2 text-xs font-bold uppercase tracking-[0.22em] transition-colors hover:text-accent ${
-                      isActive ? "text-accent" : "text-text"
+                      active ? "text-accent" : "text-text"
                     }`}
                   >
-                    {label}
+                    {link.label}
                     <span
                       aria-hidden="true"
                       className={`absolute inset-x-0 -bottom-1 h-[3px] bg-accent transition-transform duration-200 ${
-                        isActive ? "scale-x-100" : "scale-x-0"
+                        active ? "scale-x-100" : "scale-x-0"
                       }`}
                     />
-                  </a>
+                  </Link>
                 </li>
               );
             })}
@@ -111,7 +114,12 @@ export default function Navbar() {
 
         <div className="hidden items-center gap-6 lg:flex">
           <SocialLinks />
-          <ButtonLink href="#contact" variant="ghost" className="px-6 py-3" onClick={() => select("contact")}>
+          <ButtonLink
+            href="/booking"
+            variant={bookingCurrent ? "solid" : "ghost"}
+            aria-current={bookingCurrent ? "page" : undefined}
+            className={bookingCurrent ? "border-2 border-accent px-6 py-3" : "px-6 py-3"}
+          >
             Book now
           </ButtonLink>
         </div>
@@ -128,28 +136,24 @@ export default function Navbar() {
         </button>
       </div>
 
-      <div
-        id="mobile-menu"
-        hidden={!open}
-        className="border-t border-border bg-bg px-4 pt-4 pb-8 md:px-8 lg:hidden"
-      >
+      <div id="mobile-menu" hidden={!open} className="border-t border-border bg-bg px-4 pt-4 pb-8 md:px-8 lg:hidden">
         <nav aria-label="Mobile">
           <ul className="flex flex-col">
-            {navLinks.map(({ id, label }) => {
-              const isActive = active === id;
+            {navLinks.map((link) => {
+              const active = isActive(link);
               return (
-                <li key={id} className="border-b border-border">
-                  <a
-                    href={`#${id}`}
-                    onClick={() => select(id)}
-                    aria-current={isActive ? "location" : undefined}
+                <li key={link.href} className="border-b border-border">
+                  <Link
+                    href={link.href}
+                    onClick={() => select(link)}
+                    aria-current={active ? (link.section ? "location" : "page") : undefined}
                     className={`flex items-center gap-4 py-4 font-display text-3xl uppercase tracking-wider ${
-                      isActive ? "text-accent" : "text-text"
+                      active ? "text-accent" : "text-text"
                     }`}
                   >
-                    <span aria-hidden="true" className={`h-[3px] bg-accent transition-all ${isActive ? "w-6" : "w-0"}`} />
-                    {label}
-                  </a>
+                    <span aria-hidden="true" className={`h-[3px] bg-accent transition-all ${active ? "w-6" : "w-0"}`} />
+                    {link.label}
+                  </Link>
                 </li>
               );
             })}
@@ -157,7 +161,7 @@ export default function Navbar() {
         </nav>
         <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
           <SocialLinks className="-ml-2" />
-          <ButtonLink href="#contact" variant="ghost" onClick={() => select("contact")}>
+          <ButtonLink href="/booking" variant="ghost" onClick={() => setOpen(false)}>
             Book now
           </ButtonLink>
         </div>

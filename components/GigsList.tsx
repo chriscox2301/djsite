@@ -14,7 +14,7 @@ function GigRow({ gig }: { gig: Gig }) {
         <h3 className="truncate text-base font-bold">{gig.event}</h3>
         <p className="truncate text-sm text-text-muted">
           {gig.venue}
-          <span className="sm:hidden"> · {gig.city}</span>
+          <span className="sm:hidden">, {gig.city}</span>
         </p>
       </div>
       <p className="hidden text-sm whitespace-nowrap text-text-muted sm:block">{gig.city}</p>
