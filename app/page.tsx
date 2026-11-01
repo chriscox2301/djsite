@@ -11,9 +11,9 @@ export default function Home() {
     <>
       <main id="main">
         <Hero />
-        <div className="relative z-10 mx-auto -mt-20 flex max-w-[1440px] flex-col gap-5 px-4 md:-mt-28 md:px-8 lg:px-12">
+        <div className="relative z-10 mx-auto -mt-16 flex max-w-[1440px] flex-col gap-8 px-4 md:-mt-24 md:px-8 lg:gap-10 lg:px-12">
           <MixPlayer mix={latestMix} />
-          <div className="grid grid-cols-1 gap-5 lg:grid-cols-[1.05fr_0.85fr_1.25fr]">
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-10 xl:grid-cols-[1.05fr_0.7fr_1.25fr]">
             <GigsList />
             <AtmosphereCard />
             <AboutCard />

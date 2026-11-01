@@ -7,7 +7,7 @@ export default function Card({ className = "", ...props }: ComponentProps<"secti
 
 export function CardHeading({ id, children }: { id?: string; children: React.ReactNode }) {
   return (
-    <h2 id={id} className="font-display text-2xl tracking-[0.18em] text-text uppercase">
+    <h2 id={id} className="font-display text-2xl tracking-[0.18em] sm:text-3xl text-text uppercase">
       {children}
     </h2>
   );
