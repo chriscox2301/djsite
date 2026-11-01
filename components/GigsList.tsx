@@ -5,23 +5,23 @@ import { ArrowRightIcon, PlusIcon } from "./icons";
 function GigRow({ gig }: { gig: Gig }) {
   const { day, month } = splitDate(gig.date);
   return (
-    <li className="grid grid-cols-[3.5rem_1fr_auto] items-center gap-4 border-t border-border py-4 sm:grid-cols-[3.5rem_1fr_auto_auto]">
-      <time dateTime={gig.date} className="flex flex-col items-center border-r border-border pr-4 leading-none">
-        <span className="font-display text-3xl">{day}</span>
-        <span className="mt-1 text-[0.7rem] font-bold tracking-[0.2em] text-text-muted">{month}</span>
+    <li className="grid grid-cols-[3.75rem_1fr_auto] items-center gap-5 border-t border-border py-6 @sm:grid-cols-[4.25rem_1fr_auto] @md:grid-cols-[4.25rem_1fr_auto_auto]">
+      <time dateTime={gig.date} className="flex flex-col items-center border-r border-border pr-5 leading-none">
+        <span className="font-display text-4xl sm:text-5xl">{day}</span>
+        <span className="mt-1.5 text-xs font-bold tracking-[0.2em] text-text-muted">{month}</span>
       </time>
       <div className="min-w-0">
-        <h3 className="truncate text-base font-bold">{gig.event}</h3>
-        <p className="truncate text-sm text-text-muted">
+        <h3 className="text-lg leading-snug font-bold">{gig.event}</h3>
+        <p className="mt-0.5 truncate text-sm text-text-muted">
           {gig.venue}
-          <span className="sm:hidden">, {gig.city}</span>
+          <span className="@md:hidden">, {gig.city}</span>
         </p>
       </div>
-      <p className="hidden text-sm whitespace-nowrap text-text-muted sm:block">{gig.city}</p>
+      <p className="hidden text-sm whitespace-nowrap text-text-muted @md:block">{gig.city}</p>
       <a
         href={gig.url ?? "#gigs"}
         aria-label={`More info about ${gig.event}`}
-        className="grid size-9 place-items-center border border-border-strong text-text transition-colors hover:border-accent hover:bg-accent hover:text-accent-ink"
+        className="grid size-10 place-items-center border border-border-strong text-text transition-colors hover:border-accent hover:bg-accent hover:text-accent-ink"
       >
         <PlusIcon width={16} height={16} />
       </a>
@@ -31,8 +31,8 @@ function GigRow({ gig }: { gig: Gig }) {
 
 export default function GigsList() {
   return (
-    <Card id="gigs" aria-labelledby="gigs-title" className="flex flex-col p-6">
-      <div className="flex items-center justify-between gap-4 pb-4">
+    <Card id="gigs" aria-labelledby="gigs-title" className="flex flex-col p-6 sm:p-8 lg:p-10 xl:p-8 2xl:p-10">
+      <div className="flex items-center justify-between gap-4 pb-6">
         <CardHeading id="gigs-title">Upcoming gigs</CardHeading>
         <a
           href={gigsCta.url}
@@ -44,7 +44,7 @@ export default function GigsList() {
         </a>
       </div>
       {gigs.length ? (
-        <ul>
+        <ul className="@container">
           {gigs.map((gig) => (
             <GigRow key={gig.id} gig={gig} />
           ))}

@@ -5,9 +5,9 @@ import SocialLinks from "./SocialLinks";
 /** Site footer. With `showBooking` it opens with the booking call to action. */
 export default function ContactSection({ showBooking = true }: { showBooking?: boolean }) {
   return (
-    <footer id="contact" aria-labelledby={showBooking ? "contact-title" : undefined} className="mt-16 border-t border-border">
+    <footer id="contact" aria-labelledby={showBooking ? "contact-title" : undefined} className="mt-28 border-t border-border md:mt-32">
       {showBooking && (
-        <div className="mx-auto flex max-w-[1440px] flex-col gap-8 px-4 py-14 md:flex-row md:items-end md:justify-between md:px-8 lg:px-12">
+        <div className="mx-auto flex max-w-[1440px] flex-col gap-8 px-4 py-16 md:flex-row md:py-24 md:items-end md:justify-between md:px-8 lg:px-12">
           <div>
             <h2 id="contact-title" className="font-display text-5xl uppercase sm:text-6xl">
               Book {artist.name}

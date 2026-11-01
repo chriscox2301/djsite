@@ -8,7 +8,7 @@ export default function Hero() {
     <section
       id="home"
       aria-labelledby="hero-title"
-      className="relative isolate flex min-h-[640px] items-center overflow-hidden pt-18 pb-28 md:min-h-[86svh] md:pb-36"
+      className="relative isolate flex min-h-[680px] items-center overflow-hidden pt-18 pb-32 md:min-h-[94svh] md:pb-44"
     >
       <HeroSlides slides={heroSlides} />
 
