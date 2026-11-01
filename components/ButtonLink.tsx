@@ -4,7 +4,7 @@ import type { ComponentProps, ReactNode } from "react";
 type Variant = "solid" | "outline" | "ghost";
 
 const base =
-  "inline-flex items-center justify-center gap-3 whitespace-nowrap px-6 py-3.5 text-xs font-extrabold uppercase tracking-[0.25em] transition-colors duration-150";
+  "inline-flex items-center justify-center gap-3 whitespace-nowrap px-6 py-3.5 text-xs font-extrabold uppercase tracking-label transition-colors duration-150";
 
 const variants: Record<Variant, string> = {
   solid: "bg-accent text-accent-ink hover:bg-accent-hover",

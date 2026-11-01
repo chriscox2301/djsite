@@ -45,7 +45,7 @@ export default function HeroSlides({ slides }: { slides: HeroSlide[] }) {
                   onClick={() => setCurrent(i)}
                   aria-label={`Show slide ${i + 1} of ${slides.length}`}
                   aria-current={isCurrent ? "true" : undefined}
-                  className={`flex items-center gap-3 py-3 pr-4 text-xs font-bold tracking-[0.2em] tabular-nums transition-colors hover:text-accent ${
+                  className={`flex items-center gap-3 py-3 pr-4 text-xs font-bold tracking-label tabular-nums transition-colors hover:text-accent ${
                     isCurrent ? "text-text" : "text-text-subtle"
                   }`}
                 >

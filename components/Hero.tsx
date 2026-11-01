@@ -14,7 +14,7 @@ export default function Hero() {
 
       <div className="relative z-10 mx-auto w-full max-w-[1440px] px-4 md:px-8 lg:px-12">
         <div className="max-w-2xl">
-          <p className="text-xs font-bold tracking-[0.5em] text-text uppercase sm:text-sm">
+          <p className="text-xs font-bold tracking-eyebrow text-text uppercase sm:text-sm">
             {artist.role.split("/").map((part, i, arr) => (
               <span key={part}>
                 {part.trim()}
@@ -33,16 +33,17 @@ export default function Hero() {
 
           <ul
             aria-label="Genres"
-            className="mt-6 flex flex-wrap items-center gap-y-2 text-[0.7rem] font-extrabold tracking-[0.35em] uppercase sm:text-xs"
+            className="mt-6 flex flex-wrap items-center gap-y-2 text-xs font-extrabold tracking-eyebrow uppercase"
           >
-            {artist.genreTags.map((tag, i) => (
-              <li key={tag} className="flex items-center">
-                {i > 0 && (
+            {/* The "/" trails each tag (except the last), so a wrapped line never starts with one */}
+            {artist.genreTags.map((tag, i, all) => (
+              <li key={tag} className="flex items-center whitespace-nowrap">
+                {tag}
+                {i < all.length - 1 && (
                   <span aria-hidden="true" className="px-3 text-accent">
                     /
                   </span>
                 )}
-                {tag}
               </li>
             ))}
           </ul>

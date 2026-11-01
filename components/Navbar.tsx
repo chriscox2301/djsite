@@ -94,7 +94,7 @@ export default function Navbar() {
                     href={link.href}
                     onClick={() => select(link)}
                     aria-current={active ? (link.section ? "location" : "page") : undefined}
-                    className={`relative py-2 text-xs font-bold uppercase tracking-[0.22em] transition-colors hover:text-accent ${
+                    className={`relative py-2 text-xs font-bold uppercase tracking-label transition-colors hover:text-accent ${
                       active ? "text-accent" : "text-text"
                     }`}
                   >
@@ -126,7 +126,7 @@ export default function Navbar() {
 
         <button
           type="button"
-          className="grid size-11 place-items-center border border-border-strong text-text transition-colors hover:border-accent hover:text-accent lg:hidden"
+          className="grid size-11 place-items-center border border-border-control text-text transition-colors hover:border-accent hover:text-accent lg:hidden"
           aria-expanded={open}
           aria-controls="mobile-menu"
           aria-label={open ? "Close menu" : "Open menu"}

@@ -3,6 +3,7 @@ import Image from "next/image";
 import ButtonLink from "@/components/ButtonLink";
 import ContactSection from "@/components/ContactSection";
 import PageTitle from "@/components/PageTitle";
+import SectionHeading from "@/components/SectionHeading";
 import { about, aboutPage, artist } from "@/data/site";
 
 export const metadata: Metadata = {
@@ -53,9 +54,7 @@ export default function AboutPage() {
 
           <section aria-labelledby="facts-title" className="mt-24 grid gap-10 lg:grid-cols-[5fr_7fr] lg:gap-16">
             <div>
-              <h2 id="facts-title" className="font-display text-3xl tracking-[0.12em] uppercase">
-                Fact sheet
-              </h2>
+              <SectionHeading id="facts-title">Fact sheet</SectionHeading>
               <dl className="mt-6 border-t border-border">
                 {aboutPage.facts.map((fact) => (
                   <div key={fact.label} className="grid grid-cols-[9rem_1fr] gap-4 border-b border-border py-4">
@@ -76,7 +75,7 @@ export default function AboutPage() {
             </div>
 
             <div>
-              <h2 className="font-display text-3xl tracking-[0.12em] uppercase">Photos</h2>
+              <SectionHeading>Photos</SectionHeading>
               <ul className="mt-6 grid grid-cols-2 gap-4">
                 {aboutPage.photos.map((photo, i) => (
                   <li

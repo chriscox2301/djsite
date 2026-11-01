@@ -2,6 +2,7 @@
 
 import { useId, useState, type FormEvent } from "react";
 import { artist, bookingPage } from "@/data/site";
+import SectionHeading from "./SectionHeading";
 
 type Field = {
   name: string;
@@ -24,7 +25,7 @@ const fields: Field[] = [
 ];
 
 const inputClass =
-  "mt-2 block w-full border border-border-strong bg-bg px-4 py-3 text-base text-text placeholder:text-text-subtle transition-colors hover:border-text-subtle focus:border-accent focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-0 aria-[invalid=true]:border-glitch";
+  "mt-2 block w-full border border-border-control bg-bg px-4 py-3 text-base text-text placeholder:text-text-subtle transition-colors hover:border-text-subtle focus:border-accent focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-0 aria-[invalid=true]:border-glitch";
 
 /**
  * Booking request form. There is no backend: on submit it validates the
@@ -70,7 +71,7 @@ export default function BookingForm() {
 
   return (
     <form noValidate onSubmit={handleSubmit} aria-describedby={`${id}-note`} className="border border-border bg-surface p-6 md:p-10">
-      <h2 className="font-display text-3xl tracking-[0.12em] uppercase">Request a booking</h2>
+      <SectionHeading>Request a booking</SectionHeading>
       <p id={`${id}-note`} className="mt-3 max-w-prose text-sm text-text-muted">
         All fields are required unless marked optional.
       </p>
@@ -140,7 +141,7 @@ export default function BookingForm() {
       <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <button
           type="submit"
-          className="inline-flex items-center justify-center bg-accent px-8 py-4 text-xs font-extrabold tracking-[0.25em] text-accent-ink uppercase transition-colors hover:bg-accent-hover"
+          className="inline-flex items-center justify-center bg-accent px-8 py-4 text-xs font-extrabold tracking-label text-accent-ink uppercase transition-colors hover:bg-accent-hover"
         >
           Send booking request
         </button>

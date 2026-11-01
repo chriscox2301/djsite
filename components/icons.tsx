@@ -89,14 +89,6 @@ export function PauseIcon(props: IconProps) {
   );
 }
 
-export function HeartIcon(props: IconProps) {
-  return (
-    <Svg {...props}>
-      <path d="M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0 1 12 7.2 4.3 4.3 0 0 1 19.5 10c0 5.4-7.5 10-7.5 10Z" />
-    </Svg>
-  );
-}
-
 export function ShareIcon(props: IconProps) {
   return (
     <Svg {...props}>
@@ -104,24 +96,6 @@ export function ShareIcon(props: IconProps) {
       <circle cx="6" cy="12" r="2.5" />
       <circle cx="18" cy="19" r="2.5" />
       <path d="m8.2 10.8 7.6-4.5M8.2 13.2l7.6 4.5" />
-    </Svg>
-  );
-}
-
-export function MoreIcon(props: IconProps) {
-  return (
-    <Svg {...props}>
-      <circle cx="5" cy="12" r="1" fill="currentColor" />
-      <circle cx="12" cy="12" r="1" fill="currentColor" />
-      <circle cx="19" cy="12" r="1" fill="currentColor" />
-    </Svg>
-  );
-}
-
-export function PlusIcon(props: IconProps) {
-  return (
-    <Svg {...props}>
-      <path d="M12 5v14M5 12h14" />
     </Svg>
   );
 }

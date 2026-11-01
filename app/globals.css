@@ -12,6 +12,14 @@
  *   text-subtle #7f8f91  ≈ 5.9:1  (also ≥ 4.5:1 on surface)
  *   accent      #22e5d8  ≈ 12.9:1
  *   accent-ink on accent ≈ 12:1 (text inside filled buttons)
+ *
+ * Non-text contrast (WCAG 1.4.11, needs ≥ 3:1):
+ *   border-control #56706f ≈ 3.8:1 on bg, ≈ 3.6:1 on surface
+ *   Use it for the edges of form fields and outlined buttons. The darker
+ *   border / border-strong are decorative only (dividers, waveform, tracks).
+ *
+ * Letter-spacing: only these three tokens (plus Tailwind's tight/wide/wider
+ * for the display font) are used across the site.
  */
 @theme {
   --color-bg: #050708;
@@ -19,6 +27,7 @@
   --color-surface-raised: #111a1b;
   --color-border: #1f2b2d;
   --color-border-strong: #35494b;
+  --color-border-control: #56706f;
   --color-text: #f3f7f7;
   --color-text-muted: #a6b4b6;
   --color-text-subtle: #7f8f91;
@@ -31,6 +40,12 @@
   --font-display: var(--font-anton), "Impact", sans-serif;
   --font-sans: var(--font-archivo), system-ui, sans-serif;
   --font-hand: var(--font-marker), cursive;
+
+  /* tracking-heading: section headings · tracking-label: buttons, nav, small
+     labels · tracking-eyebrow: wide-spaced overlines and genre tags */
+  --tracking-heading: 0.15em;
+  --tracking-label: 0.22em;
+  --tracking-eyebrow: 0.4em;
 }
 
 html {
@@ -119,12 +134,11 @@ body {
   html {
     scroll-behavior: auto;
   }
+  /* No glitch at all: a frozen slice reads as a stray line through the name */
   .glitch::before,
   .glitch::after {
+    display: none;
     animation: none;
-  }
-  .glitch::before {
-    clip-path: inset(30% 0 62% 0);
   }
   *,
   *::before,

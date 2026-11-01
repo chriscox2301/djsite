@@ -36,8 +36,16 @@ export type Mix = {
   duration: string;
   cover: string;
   coverAlt: string;
-  /** 0–1: how much of the waveform is shown as "played" */
+  /**
+   * Not shown any more: the waveform only shows real playback progress
+   * (0 % when there is no `url`). Kept so existing content stays valid.
+   */
   progress: number;
+  /**
+   * Where the mix can be played. A direct audio file (.mp3, .m4a, …) plays in
+   * the site's own player; a SoundCloud or Mixcloud page shows their embed;
+   * any other url becomes a "Listen" link. Leave empty to hide all controls.
+   */
   url?: string;
 };
 
