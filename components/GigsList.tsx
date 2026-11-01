@@ -25,8 +25,8 @@ function GigRow({ gig }: { gig: Gig }) {
         <span className="mt-1 text-xs font-bold tracking-label text-text-muted">{month}</span>
       </time>
       <div className="min-w-0">
-        <h3 className="truncate text-base font-bold">{gig.event}</h3>
-        <p className="truncate text-sm text-text-muted">
+        <h3 className="text-lg leading-snug font-bold">{gig.event}</h3>
+        <p className="mt-0.5 truncate text-sm text-text-muted">
           {gig.venue}
           <span className={hasLink ? "" : "sm:hidden"}>, {gig.city}</span>
         </p>
@@ -54,8 +54,8 @@ function GigRow({ gig }: { gig: Gig }) {
 
 export default function GigsList() {
   return (
-    <Card id="gigs" aria-labelledby="gigs-title" className="flex flex-col p-6">
-      <div className="flex items-center justify-between gap-4 pb-4">
+    <Card id="gigs" aria-labelledby="gigs-title" className="flex flex-col p-6 sm:p-8 lg:p-10 xl:p-8 2xl:p-10">
+      <div className="flex items-center justify-between gap-4 pb-6">
         <SectionHeading id="gigs-title">Upcoming gigs</SectionHeading>
         {/* Hidden until there is a real gig list to link to */}
         {isRealLink(gigsCta.url) && (
@@ -70,7 +70,7 @@ export default function GigsList() {
         )}
       </div>
       {gigs.length ? (
-        <ul>
+        <ul className="@container">
           {gigs.map((gig) => (
             <GigRow key={gig.id} gig={gig} />
           ))}

@@ -19,7 +19,7 @@ export default function Waveform({ progress, count = 120 }: { progress: number; 
   const played = Math.round(progress * count);
 
   return (
-    <div aria-hidden="true" className="flex h-16 w-full items-center gap-px overflow-hidden sm:gap-[2px]">
+    <div aria-hidden="true" className="flex h-16 w-full lg:h-24 items-center gap-px overflow-hidden sm:gap-[2px]">
       {heights.map((h, i) => (
         <span
           key={i}

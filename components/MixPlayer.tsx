@@ -75,29 +75,29 @@ export default function MixPlayer({ mix }: { mix: Mix }) {
   }
 
   return (
-    <Card id="music" aria-labelledby="mix-title" className="p-4 sm:p-6">
-      <div className="flex flex-col gap-5 md:flex-row md:items-center md:gap-8">
-        <div className="flex items-center gap-5 md:w-[38%] md:shrink-0">
-          <div className="relative size-24 shrink-0 overflow-hidden border border-border-strong sm:size-28">
-            <Image src={mix.cover} alt={mix.coverAlt} fill sizes="112px" className="object-cover" />
+    <Card id="music" aria-labelledby="mix-title" className="p-5 sm:p-8 lg:p-10">
+      <div className="flex flex-col gap-5 md:flex-row md:items-center md:gap-10">
+        <div className="flex items-center gap-6 md:w-[38%] md:shrink-0">
+          <div className="relative size-24 shrink-0 overflow-hidden border border-border-strong sm:size-32 lg:size-36">
+            <Image src={mix.cover} alt={mix.coverAlt} fill sizes="144px" className="object-cover" />
             {source.kind === "audio" && (
               <button
                 type="button"
                 onClick={togglePlay}
                 aria-pressed={playing}
                 aria-label={`Play ${mix.title}`}
-                className="absolute inset-0 m-auto grid size-12 place-items-center rounded-full border-2 border-text bg-bg/70 text-text transition-colors hover:border-accent hover:bg-accent hover:text-accent-ink"
+                className="absolute inset-0 m-auto grid size-14 place-items-center rounded-full border-2 border-text bg-bg/70 text-text transition-colors hover:border-accent hover:bg-accent hover:text-accent-ink"
               >
                 {playing ? <PauseIcon width={16} height={16} /> : <PlayIcon width={16} height={16} className="translate-x-px" />}
               </button>
             )}
           </div>
           <div className="min-w-0">
-            <p className="text-xs font-bold tracking-eyebrow text-text-subtle uppercase">{mix.label}</p>
-            <h2 id="mix-title" className="mt-2 font-display text-2xl leading-tight tracking-wider uppercase sm:text-3xl">
+            <p className="text-[0.7rem] font-bold tracking-[0.45em] text-text-subtle uppercase">{mix.label}</p>
+            <h2 id="mix-title" className="mt-3 font-display text-3xl leading-tight tracking-wider uppercase sm:text-4xl">
               {mix.title}
             </h2>
-            <p className="mt-1.5 text-sm text-text-muted">
+            <p className="mt-2 text-base text-text-muted">
               {mix.artist}
               <span aria-hidden="true" className="px-2">
                 ·
