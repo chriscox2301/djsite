@@ -25,12 +25,12 @@ export default function BookingPage() {
             <dl className="divide-y divide-border border-y border-border">
               {bookingPage.info.map((item) => (
                 <div key={item.title} className="py-6">
-                  <dt className="font-display text-2xl tracking-[0.12em] uppercase">{item.title}</dt>
+                  <dt className="font-display text-2xl tracking-heading uppercase">{item.title}</dt>
                   <dd className="mt-2 text-sm leading-relaxed text-text-muted">{item.body}</dd>
                 </div>
               ))}
               <div className="py-6">
-                <dt className="font-display text-2xl tracking-[0.12em] uppercase">Direct</dt>
+                <dt className="font-display text-2xl tracking-heading uppercase">Direct</dt>
                 <dd className="mt-2 text-sm leading-relaxed text-text-muted">
                   Prefer your own email?{" "}
                   <a

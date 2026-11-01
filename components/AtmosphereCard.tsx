@@ -1,10 +1,10 @@
 import Image from "next/image";
 import { atmosphere } from "@/data/site";
 
-/** Black-and-white mood photo with a handwritten turquoise accent. */
+/** Black-and-white mood photo with a handwritten turquoise accent. Desktop only (lg+), to keep the mobile home page short. */
 export default function AtmosphereCard() {
   return (
-    <figure className="relative min-h-72 overflow-hidden border border-border bg-surface">
+    <figure className="relative hidden min-h-72 overflow-hidden border border-border bg-surface lg:block">
       <Image
         src={atmosphere.image}
         alt={atmosphere.alt}

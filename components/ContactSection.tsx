@@ -29,7 +29,7 @@ export default function ContactSection({ showBooking = true }: { showBooking?: b
       )}
       <div className="border-t border-border">
         <div className="mx-auto flex max-w-[1440px] flex-wrap items-center justify-between gap-4 px-4 py-5 md:px-8 lg:px-12">
-          <p className="text-xs tracking-[0.2em] text-text-subtle uppercase">© {artist.name}</p>
+          <p className="text-xs tracking-label text-text-subtle uppercase">© {artist.name}</p>
           <SocialLinks className="-mr-2" />
         </div>
       </div>

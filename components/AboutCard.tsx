@@ -1,14 +1,15 @@
 import Image from "next/image";
 import { about } from "@/data/site";
 import ButtonLink from "./ButtonLink";
-import Card, { CardHeading } from "./Card";
+import Card from "./Card";
+import SectionHeading from "./SectionHeading";
 import { ArrowRightIcon } from "./icons";
 
 export default function AboutCard() {
   return (
     <Card id="about" aria-labelledby="about-title" className="grid grid-cols-1 sm:grid-cols-[1fr_38%]">
       <div className="flex flex-col p-6">
-        <CardHeading id="about-title">{about.title}</CardHeading>
+        <SectionHeading id="about-title">{about.title}</SectionHeading>
         <p className="mt-5 text-sm leading-relaxed text-text-muted">{about.bio}</p>
         <div className="mt-auto pt-6">
           <ButtonLink href={about.ctaUrl} variant="ghost" className="px-5 py-3">
